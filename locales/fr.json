@@ -27,6 +27,7 @@
     "set_wallpaper_button": "Définir le fond d'écran",
     "preview_in_window_button": "Aperçu en fenêtre",
     "stop_button": "Arrêter",
+    "remove_wallpaper_button": "Supprimer le fond d'écran",
     "restore_last_button": "Restaurer le dernier fond d'écran",
     "auto_restore_checkbox": "Restaurer automatiquement le fond d'écran au démarrage",
     "stop_on_exit_checkbox": "Arrêter les fonds d'écran en quittant l'application",

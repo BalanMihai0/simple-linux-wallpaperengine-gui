@@ -464,15 +464,15 @@ class WallpaperApp(QMainWindow):
         layout.setContentsMargins(12, 24, 0, 0)
         layout.setSpacing(0)
         push_buttons_layout = QHBoxLayout()
-        push_buttons_layout.setContentsMargins(165, 0, 0, 0)
-        push_buttons_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        push_buttons_layout.setContentsMargins(0, 0, 0, 0)
+        push_buttons_layout.setSpacing(25)
+        push_buttons_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         header = QHBoxLayout()
         self.btn_scan = QPushButton("scan_local_wallpapers_button")
         self.btn_scan.clicked.connect(self.start_scan)
         self.btn_scan.setFixedSize(160, 200)
         self.btn_scan.setCursor(Qt.CursorShape.PointingHandCursor)
         push_buttons_layout.addWidget(self.btn_scan)
-        push_buttons_layout.addSpacing(25)
         self.btn_set_library = QPushButton("set_wallpaper_button")
         self.btn_set_library.clicked.connect(self.run_wallpaper)
         self.btn_set_library.setFixedSize(160, 200)
@@ -483,14 +483,12 @@ class WallpaperApp(QMainWindow):
         self.btn_select_folder.clicked.connect(self.manual_scan)
         self.btn_select_folder.setFixedSize(160, 200)
         self.btn_select_folder.setCursor(Qt.CursorShape.PointingHandCursor)
-        push_buttons_layout.addSpacing(25)
         push_buttons_layout.addWidget(self.btn_select_folder)
-        self.btn_stop_library = QPushButton("stop_button")
+        self.btn_stop_library = QPushButton("remove_wallpaper_button")
         self.btn_stop_library.setObjectName("DangerButton")
         self.btn_stop_library.clicked.connect(self.stop_screen_wallpaper)
         self.btn_stop_library.setFixedSize(160, 200)
         self.btn_stop_library.setCursor(Qt.CursorShape.PointingHandCursor)
-        push_buttons_layout.addSpacing(25)
         push_buttons_layout.addWidget(self.btn_stop_library)
         layout.addLayout(push_buttons_layout)
         layout.addLayout(header)
@@ -584,7 +582,7 @@ class WallpaperApp(QMainWindow):
         self.btn_set.setText(self._("set_wallpaper_button"))
         self.btn_set_library.setText(self._("set_wallpaper_button"))
         self.btn_stop.setText(self._("stop_button"))
-        self.btn_stop_library.setText(self._("stop_button"))
+        self.btn_stop_library.setText(self._("remove_wallpaper_button"))
         self.btn_show_log.setText(self._("show_log_button"))
         self.btn_scan.setText(self._("scan_local_wallpapers_button"))
         self.btn_select_folder.setText(self._("select_folder_button"))
@@ -1199,30 +1197,23 @@ class WallpaperApp(QMainWindow):
             self.status_bar.showMessage(self._("status_all_stopped"))
 
     def stop_screen_wallpaper(self):
-        """Stop the wallpaper only for the currently selected screen.
-        When keep_others is unchecked, falls back to stopping all."""
+        """Stop the wallpaper only for the currently selected screen, leaving others untouched."""
         screen_name = self.screen_combo.currentText()
-        if self.chk_keep_others.isChecked():
-            stopped = False
-            mgr = self.screen_proc_managers.pop(screen_name, None)
-            if mgr and mgr.is_running():
-                try:
-                    mgr.stop(timeout=1)
-                    stopped = True
-                except Exception as e:
-                    logging.error("Couldn't stop wallpaper on %s: %s", screen_name, e)
-            self.screen_assignments.pop(screen_name, None)
-            # Also stop the legacy single manager in case it was running for this screen.
-            if self.wallpaper_proc_manager.is_running():
-                try:
-                    self.wallpaper_proc_manager.stop(timeout=1)
-                    stopped = True
-                except Exception as e:
-                    logging.error("Couldn't stop legacy wallpaper: %s", e)
-            self.status_bar.showMessage(self._("status_all_stopped"))
-            self.save_config()
-        else:
-            self.stop_wallpapers()
+        mgr = self.screen_proc_managers.pop(screen_name, None)
+        if mgr and mgr.is_running():
+            try:
+                mgr.stop(timeout=1)
+            except Exception as e:
+                logging.error("Couldn't stop wallpaper on %s: %s", screen_name, e)
+        self.screen_assignments.pop(screen_name, None)
+        # Also stop the legacy single manager in case it was the one running for this screen.
+        if self.wallpaper_proc_manager.is_running():
+            try:
+                self.wallpaper_proc_manager.stop(timeout=1)
+            except Exception as e:
+                logging.error("Couldn't stop legacy wallpaper: %s", e)
+        self.status_bar.showMessage(self._("status_all_stopped"))
+        self.save_config()
 
     def check_wallpaper_process(self):
         result = self.wallpaper_proc_manager.check()

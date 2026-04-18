@@ -27,6 +27,7 @@
     "set_wallpaper_button": "Встановити шпалери",
     "preview_in_window_button": "Перегляд у вікні",
     "stop_button": "Зупинити",
+    "remove_wallpaper_button": "Прибрати шпалери",
     "restore_last_button": "Відновити останні шпалери",
     "auto_restore_checkbox": "Автоматично відновлювати шпалери при запуску",
     "stop_on_exit_checkbox": "Зупиняти шпалери при виході з програми",

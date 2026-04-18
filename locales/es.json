@@ -27,6 +27,7 @@
     "set_wallpaper_button": "Establecer fondo",
     "preview_in_window_button": "Vista previa en ventana",
     "stop_button": "Detener",
+    "remove_wallpaper_button": "Eliminar fondo de pantalla",
     "restore_last_button": "Restaurar último fondo de pantalla",
     "auto_restore_checkbox": "Restaurar fondo de pantalla automáticamente al iniciar",
     "stop_on_exit_checkbox": "Detener fondos de pantalla al salir de la aplicación",

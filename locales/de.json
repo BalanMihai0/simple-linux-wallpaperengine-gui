@@ -27,6 +27,7 @@
     "set_wallpaper_button": "Hintergrund festlegen",
     "preview_in_window_button": "Vorschau im Fenster",
     "stop_button": "Stopp",
+    "remove_wallpaper_button": "Hintergrundbild entfernen",
     "restore_last_button": "Letztes Hintergrundbild wiederherstellen",
     "auto_restore_checkbox": "Hintergrundbild beim Start automatisch wiederherstellen",
     "stop_on_exit_checkbox": "Hintergrund beim Beenden der App stoppen",

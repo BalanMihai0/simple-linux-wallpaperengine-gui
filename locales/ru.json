@@ -27,6 +27,7 @@
     "set_wallpaper_button": "Установить обои",
     "preview_in_window_button": "Предпросмотр в окне",
     "stop_button": "Остановить",
+    "remove_wallpaper_button": "Убрать обои",
     "restore_last_button": "Восстановить последние обои",
     "auto_restore_checkbox": "Автоматически восстанавливать обои при запуске",
     "stop_on_exit_checkbox": "Останавливать обои при выходе из приложения",
