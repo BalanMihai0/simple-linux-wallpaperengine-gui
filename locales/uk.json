@@ -19,6 +19,7 @@
     "disable_parallax_checkbox": "Вимкнути ефект паралакса (--disable-parallax)",
     "no_fullscreen_pause_checkbox": "Не призупиняти в повноекранному режимі (--no-fullscreen-pause)",
     "windowed_mode_checkbox": "Віконний режим (Виправлення для KDE/GNOME)",
+    "keep_others_checkbox": "Зберігати шпалери на інших екранах",
     "kwin_hint": "Примітка: Якщо вікно шпалер знаходиться поверх інших вікон, вам може знадобитися створити правило KWin для цього вікна (Alt+F3 -> Інші дії -> Налаштувати особливі параметри вікна), щоб воно завжди було «На задньому плані» (Keep Below).",
     "adv_frame": "Додатково",
     "set_property_label": "Встановити властивості (--set-property):",
